@@ -22,15 +22,17 @@ int main() {
 		cout << "Enter the source vertex number: ";
 		getline(cin, input);
 		source_vertex = stoi(input);
+		cout << '\n';
 
 		// Create graph object
 		Graph graph(num_vertices, num_edges);
 
 		// Upon valid input, we have the user define the edge properties
 		int source, destination, weight;
-		for (int i = 1; i < num_edges; ++i) {
-			cout << "Enter edge " << i << " properties: Source, Destination, Weight respectively\n";
+		for (int i = 0; i < num_edges; ++i) {
+			cout << "Enter edge " << i + 1 << " properties: Source, Destination, Weight respectively\n";
 			cin >> source >> destination >> weight; // An exception will be thrown upon non-numeric input
+			cout << '\n';
 
 			graph.addEdge(source, destination, weight);
 		}

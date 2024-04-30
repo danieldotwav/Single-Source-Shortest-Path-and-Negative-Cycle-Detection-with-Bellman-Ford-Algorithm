@@ -41,18 +41,25 @@ public:
 		}
 
 		// Now we check for negative weight cycles
+		bool has_negative_weight_cycle = false;
 		for (const Edge& edge : edges) {
 			int u = edge.source;
 			int v = edge.destination;
 			int weight = edge.weight;
 
 			if (distance[u] != INT_MAX && distance[u] + weight < distance[v]) {
-				cout << "Graph contains a negative weight cycle" << endl;
-				return;
+				has_negative_weight_cycle = true;
 			}
 		}
 
-		cout << "Vertext Distance from Source" << endl;
+		if (has_negative_weight_cycle) {
+			// TODO: Add a utility function to backtrack through the vertices that form the negative-weight cycle
+		}
+		else {
+			cout << "This graph does not have a negative cycle.\n";
+		}
+
+		cout << "Vertext Distance from Source Vertex" << endl;
 		for (int i = 0; i < num_vertices; ++i) {
 			cout << i << "\t\t" << distance[i] << endl;
 		}
