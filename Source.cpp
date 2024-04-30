@@ -9,6 +9,7 @@ int main() {
 	try {
 		string input;
 		int num_vertices, num_edges, source_vertex;
+		bool is_valid_input = true;
 
 		cout << "Enter number of vertices: ";
 		getline(cin, input);
@@ -22,10 +23,13 @@ int main() {
 		getline(cin, input);
 		source_vertex = stoi(input);
 
-
 		// Upon valid input, we have the user define the edge properties
+		int source, destination, weight;
 		for (int i = 1; i < num_edges; ++i) {
 			// Here we will likely use the graph class to define a create-edge function
+			cout << "Enter edge " << i << " properties: Source, Destination, Weight respectively\n";
+			cin >> source >> destination >> weight; // An exception will be thrown upon non-numeric input
+
 		}
 	}
 	catch (invalid_argument &excp) {
