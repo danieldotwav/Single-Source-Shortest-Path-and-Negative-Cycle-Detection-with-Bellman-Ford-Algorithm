@@ -23,14 +23,20 @@ int main() {
 		getline(cin, input);
 		source_vertex = stoi(input);
 
+		// Create graph object
+		Graph graph(num_vertices, num_edges);
+
 		// Upon valid input, we have the user define the edge properties
 		int source, destination, weight;
 		for (int i = 1; i < num_edges; ++i) {
-			// Here we will likely use the graph class to define a create-edge function
 			cout << "Enter edge " << i << " properties: Source, Destination, Weight respectively\n";
 			cin >> source >> destination >> weight; // An exception will be thrown upon non-numeric input
 
+			graph.addEdge(source, destination, weight);
 		}
+
+		// Use the Bellman-Ford algorithm implementation to find shortest path/detect negative cycle
+		graph.bellmanFord(source_vertex);
 	}
 	catch (invalid_argument &excp) {
 		cout << "\nError: invalid input detected\n\n";

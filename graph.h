@@ -10,9 +10,13 @@ struct Edge {
 	int source, destination, weight;
 };
 
-struct Graph {
-	int V, E;
+class Graph {
+private:
+	int num_vertices, num_edges;
 	vector<Edge> edges;
+
+public:
+	Graph(int v, int e) : num_vertices(v), num_edges(e) {}
 
 	void addEdge(int s, int d, int w) {
 		Edge edge = { s, d, w };
@@ -20,11 +24,11 @@ struct Graph {
 	}
 
 	void bellmanFord(int src) {
-		vector<int> distance(V, INT_MAX);
+		vector<int> distance(num_vertices, INT_MAX);
 		distance[src] = 0;
 
 		// Relax all edges V-1 times
-		for (int i = 1; i < V - 1; ++i) {
+		for (int i = 1; i < num_vertices - 1; ++i) {
 			for (const Edge& edge : edges) {
 				int u = edge.source;
 				int v = edge.destination;
@@ -49,7 +53,7 @@ struct Graph {
 		}
 
 		cout << "Vertext Distance from Source" << endl;
-		for (int i = 0; i < V; ++i) {
+		for (int i = 0; i < num_vertices; ++i) {
 			cout << i << "\t\t" << distance[i] << endl;
 		}
 	}
