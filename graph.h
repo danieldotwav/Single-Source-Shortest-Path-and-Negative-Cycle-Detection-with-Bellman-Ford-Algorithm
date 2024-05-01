@@ -109,7 +109,7 @@ public:
 2 3 2
 3 0 3
 
-// Test 2 - Negative Cycle (from Sample Outputs)
+// Test 2 - Negative Cycle (graph data from Sample Outputs)
 
 4
 5
@@ -120,8 +120,18 @@ public:
 3 2 3
 3 0 2
 
+// Test 3 - Negative Cycle (actual input from Sample Outputs)
 
-// Test 3
+4
+5
+1
+0 1 1
+0 3 1
+1 2 -4
+2 1 2
+2 3 3
+
+// Test 4
 
 5
 6
