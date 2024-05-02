@@ -91,7 +91,7 @@ public:
             cout << "This graph does not have a negative cycle.\n";
         }
 
-        // Output the shortest path to all vertices
+        // Output the shortest path to all vertices from source vertex
         cout << "Vertex Distance from Source Vertex" << endl;
         for (int i = 0; i < num_vertices; ++i) {
             cout << i << "\t\t" << (distance[i] == INT_MAX ? "Infinity" : to_string(distance[i])) << endl;
@@ -103,7 +103,7 @@ public:
 
 
 /*
-// Test 1 - Negative Cycle
+// Test 1 - Negative Weight Cycle
 
 4
 5
@@ -114,7 +114,7 @@ public:
 2 3 2
 3 0 3
 
-// Test 2 - Negative Cycle (graph data from Sample Outputs)
+// Test 2 - Negative Weight Cycle (graph data from Sample Outputs)
 
 4
 5
@@ -125,7 +125,7 @@ public:
 3 2 3
 3 0 2
 
-// Test 3 - Negative Cycle (actual input from Sample Outputs)
+// Test 3 - Negative Weight Cycle (actual input from Sample Outputs)
 
 4
 5
@@ -136,7 +136,7 @@ public:
 2 1 2
 2 3 3
 
-// Test 4
+// Test 4 - No Negative Weight Cycle
 
 5
 6
@@ -147,5 +147,37 @@ public:
 2 3 6
 2 4 4
 4 3 -5
+
+// Test 5 - Simple Graph With No Negative Weight Cycle
+
+4
+4
+1
+0 1 1
+1 2 1
+2 3 1
+3 0 1
+
+// Test 6 - Disconnected Graph With Negative Edge
+
+4
+2
+0
+0 1 -1
+2 3 2
+
+// Test 7 - Complex Graph with Multiple Negative Cycles
+
+6
+8
+3
+0 1 6
+1 2 -2
+2 3 1
+3 4 -1
+4 5 -8
+5 3 1
+1 5 -4
+5 2 3
 
 */
