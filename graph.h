@@ -27,9 +27,8 @@ public:
 	}
 
     void bellmanFord(int src) {
-        // Initialize distance and predecessor arrays
-        vector<int> distance(num_vertices, INT_MAX);
-        vector<int> predecessor(num_vertices, -1);
+        vector<int> distance(num_vertices, INT_MAX); // The distance from the source to all other vertices is assumed to be infinite initially
+        vector<int> predecessor(num_vertices, -1); // Keep track of predecessors for negative-weight cycle detection
         distance[src] = 0;
 
         // Relax all edges V-1 times
@@ -46,22 +45,27 @@ public:
             }
         }
 
-        // Check for negative-weight cycles
+        // If any edge can still be relaxed after V-1 iterations, we know there must exist a negative-weight cycle
         bool has_negative_weight_cycle = false;
+        bool is_complete_cycle = false;
+
         for (const Edge& edge : edges) {
             int u = edge.source;
             int v = edge.destination;
             int weight = edge.weight;
 
-            if (distance[u] != INT_MAX && distance[u] + weight < distance[v]) {
+            if (!is_complete_cycle && distance[u] != INT_MAX && distance[u] + weight < distance[v]) {
                 cout << "Graph contains negative weight cycle.\n";
                 has_negative_weight_cycle = true;
-                // Find the vertices in the cycle
+
+                // Each index stores the vertex leading to cycle_start. By following it back, we will eventually arrive at the start of the cycle
                 vector<int> cycle;
                 int cycle_start = v;
-                for (int i = 0; i < num_vertices; ++i)
-                    cycle_start = predecessor[cycle_start];  // Find the start of the cycle
+                for (int i = 0; i < num_vertices; ++i) {
+                    cycle_start = predecessor[cycle_start];
+                }
 
+                // Now that we have the starting vertex, we can begin to construct the negative-weight cycle
                 int cycle_vertex = cycle_start;
                 do {
                     cycle.push_back(cycle_vertex);
@@ -69,7 +73,8 @@ public:
                 } while (cycle_vertex != cycle_start);
                 cycle.push_back(cycle_start);  // Close the cycle
 
-                cout << "Cycle consists of vertices: ";
+                // Print the cycle for the user
+                cout << "This graph contains a negative edge cycle with path: ";
                 for (int i = cycle.size() - 1; i >= 0; --i) {
                     if (i == 0) {
                         cout << cycle[i] << endl;
@@ -78,7 +83,7 @@ public:
                         cout << cycle[i] << " -> ";
                     }
                 }
-                break;  // Exit after finding one cycle
+                is_complete_cycle = true;
             }
         }
 
